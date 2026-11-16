@@ -1,0 +1,410 @@
+# `travel.html`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Travel — Ismaël Bonneau</title>
+    <meta name="description" content="A collection of travel stories, places and photographs by Ismaël Bonneau.">
+
+    <style>
+        :root {
+            --background: #faf9f6;
+            --surface: #ffffff;
+            --text: #252525;
+            --muted: #77736d;
+            --accent: #9a7655;
+            --border: #e9e5df;
+            --max-width: 1120px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+            font-family: Georgia, "Times New Roman", serif;
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .container {
+            width: min(100% - 48px, var(--max-width));
+            margin: 0 auto;
+        }
+
+        /* Navigation */
+
+        header {
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav {
+            min-height: 76px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+            font-family: Arial, sans-serif;
+        }
+
+        .brand {
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .nav-links a {
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text);
+        }
+
+        /* Introduction */
+
+        .intro {
+            padding: 100px 0 70px;
+            max-width: 760px;
+        }
+
+        .eyebrow {
+            color: var(--accent);
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin-top: 20px;
+            font-size: clamp(42px, 7vw, 76px);
+            font-weight: 400;
+            line-height: 1.08;
+            letter-spacing: -0.045em;
+        }
+
+        .intro p {
+            margin-top: 25px;
+            max-width: 620px;
+            color: var(--muted);
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        /* Featured photograph */
+
+        .hero-image {
+            height: clamp(280px, 48vw, 540px);
+            overflow: hidden;
+            background: #e5e0d8;
+        }
+
+        .hero-image img {
+            height: 100%;
+        }
+
+        .image-caption {
+            margin-top: 12px;
+            color: var(--muted);
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            text-align: right;
+        }
+
+        /* Travel archive */
+
+        .archive {
+            padding: 100px 0;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 20px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h2 {
+            font-size: 30px;
+            font-weight: 400;
+            letter-spacing: -0.025em;
+        }
+
+        .section-note {
+            color: var(--muted);
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+
+        .trip {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 60px;
+            align-items: center;
+            padding: 55px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .trip:nth-child(even) {
+            grid-template-columns: 0.85fr 1.15fr;
+        }
+
+        .trip:nth-child(even) .trip-image {
+            order: 2;
+        }
+
+        .trip-image {
+            display: block;
+            overflow: hidden;
+            background: #e5e0d8;
+        }
+
+        .trip-image img {
+            aspect-ratio: 4 / 3;
+            transition: transform 0.6s ease;
+        }
+
+        .trip-image:hover img {
+            transform: scale(1.035);
+        }
+
+        .trip-content {
+            padding: 15px 0;
+        }
+
+        .trip-meta {
+            color: var(--accent);
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        h3 {
+            margin-top: 13px;
+            font-size: clamp(29px, 4vw, 42px);
+            font-weight: 400;
+            line-height: 1.15;
+            letter-spacing: -0.035em;
+        }
+
+        .trip-description {
+            margin-top: 20px;
+            max-width: 420px;
+            color: var(--muted);
+            font-size: 16px;
+        }
+
+        .trip-link {
+            display: inline-block;
+            margin-top: 25px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--accent);
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            letter-spacing: 0.04em;
+            transition: color 0.2s;
+        }
+
+        .trip-link:hover {
+            color: var(--accent);
+        }
+
+        /* Footer */
+
+        footer {
+            padding: 30px 0;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 700px) {
+            .container {
+                width: min(100% - 36px, var(--max-width));
+            }
+
+            nav {
+                min-height: 68px;
+            }
+
+            .nav-links {
+                gap: 15px;
+                font-size: 12px;
+            }
+
+            .intro {
+                padding: 70px 0 45px;
+            }
+
+            .intro p {
+                font-size: 16px;
+            }
+
+            .archive {
+                padding: 70px 0;
+            }
+
+            .section-heading {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .trip,
+            .trip:nth-child(even) {
+                grid-template-columns: 1fr;
+                gap: 22px;
+                padding: 35px 0;
+            }
+
+            .trip:nth-child(even) .trip-image {
+                order: 0;
+            }
+
+            .trip-content {
+                padding: 0;
+            }
+
+            footer .container {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav class="container">
+        <a class="brand" href="/">ISMAËL BONNEAU</a>
+
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/#projects">Projects</a></li>
+            <li><a href="/travel/index.html" class="active">Travel</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+    <section class="container intro">
+        <span class="eyebrow">Places, people &amp; memories</span>
+
+        <h1>A collection of journeys.</h1>
+
+        <p>
+            I love discovering new places, wandering through unfamiliar
+            streets and experiencing different cultures.
+            This is a collection of journeys, moments and photographs
+            gathered along the way.
+        </p>
+    </section>
+
+    <section class="container">
+        <div class="hero-image">
+            <!-- Replace with one of your own travel photographs -->
+            <img
+                src="assets/travel/cover.jpg"
+                alt="A photograph from one of my travels"
+            >
+        </div>
+        <p class="image-caption">A moment somewhere along the way.</p>
+    </section>
+
+    <section class="container archive">
+        <div class="section-heading">
+            <h2>Travel journal</h2>
+            <span class="section-note">Selected journeys</span>
+        </div>
+
+        <!-- TRIP TEMPLATE: duplicate this block for each journey -->
+
+        <article class="trip">
+            <a class="trip-image" href="travel/example-trip/">
+                <img
+                    src="assets/travel/example-trip/cover.jpg"
+                    alt="A photograph from this journey"
+                    loading="lazy"
+                >
+            </a>
+
+            <div class="trip-content">
+                <span class="trip-meta">Country · Month Year</span>
+                <h3>Destination name</h3>
+
+                <p class="trip-description">
+                    A few words about this journey. The places explored,
+                    the atmosphere, the people and the memories worth
+                    keeping.
+                </p>
+
+                <a class="trip-link" href="travel/example-trip/">
+                    Explore this journey →
+                </a>
+            </div>
+        </article>
+
+        <!-- Add more trip articles here -->
+
+    </section>
+
+</main>
+
+<footer>
+    <div class="container">
+        <span>© Ismaël Bonneau</span>
+        <span>Made with curiosity and a camera.</span>
+    </div>
+</footer>
+
+</body>
+</html>
+```
